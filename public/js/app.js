@@ -1908,9 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utility_colorlist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility/colorlist */ "./resources/js/utility/colorlist.js");
+/* harmony import */ var _utility_colorlist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/colorlist */ "./resources/js/utility/colorlist.js");
 //
 //
 //
@@ -1985,7 +1983,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2007,8 +2004,8 @@ __webpack_require__.r(__webpack_exports__);
       this.error = null;
       this.loading = true; // const fetchedId = this.$route.params.id
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/daylites?latitude=' + latitude).then(function (response) {
-        var color = '#' + _utility_colorlist__WEBPACK_IMPORTED_MODULE_1__["default"][_this.cities.length];
+      axios.get('http://localhost:8000/api/daylites?latitude=' + latitude).then(function (response) {
+        var color = '#' + _utility_colorlist__WEBPACK_IMPORTED_MODULE_0__["default"][_this.cities.length];
 
         _this.cities.push({
           name: cityname,
@@ -2029,7 +2026,7 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       var latitude;
       var cityname;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://api.geonames.org/searchJSON', {
+      axios.get('http://api.geonames.org/searchJSON', {
         params: {
           name: this.inp_name,
           maxRows: 1,

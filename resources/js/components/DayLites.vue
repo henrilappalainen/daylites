@@ -73,7 +73,6 @@
 
 
 <script>
-import axios from 'axios'
 import colorlist from '../utility/colorlist'
 
 export default {
@@ -95,7 +94,7 @@ export default {
       this.error = null
       this.loading = true
       // const fetchedId = this.$route.params.id
-      axios.get('http://localhost:8000/api/daylites?latitude=' + latitude)
+      axios.get('https://localhost:8000/api/daylites?latitude=' + latitude)
         .then(response => {
           const color = '#' + colorlist[this.cities.length]
 
@@ -115,7 +114,7 @@ export default {
       let latitude
       let cityname
 
-      axios.get('http://api.geonames.org/searchJSON', {
+      axios.get('https://secure.geonames.org/searchJSON', {
         params: {
           name: this.inp_name,
           maxRows: 1,
