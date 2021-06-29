@@ -90,11 +90,11 @@ export default {
     // this.fetchData('Helsinki', 60)
   },
   methods: {
-    fetchData ( cityname, latitude ) {
+    fetchData ( cityname, latitude, longitude ) {
       this.error = null
       this.loading = true
       // const fetchedId = this.$route.params.id
-      axios.get('https://localhost:8000/api/daylites?latitude=' + latitude)
+      axios.get('/api/daylites?latitude=' + latitude + '&longitude=' + longitude)
         .then(response => {
           const color = '#' + colorlist[this.cities.length]
 
@@ -112,6 +112,7 @@ export default {
       e.preventDefault()
 
       let latitude
+      let longitude
       let cityname
 
       axios.get('https://secure.geonames.org/searchJSON', {
@@ -125,16 +126,15 @@ export default {
 
           if (data.name.toLowerCase() === this.inp_name.toLowerCase()) {
             latitude = data.lat
+            longitude = data.lng
             cityname = data.name
+
+            this.inp_name = ''
+
+            this.fetchData( cityname, latitude, longitude )
           } else {
             this.error = 'Kaupunkia ei löytynyt!'
-
-            return false
           }
-
-          this.inp_name = ''
-
-          this.fetchData( cityname, latitude )
         })
         .catch(error => {
           console.log(error)
