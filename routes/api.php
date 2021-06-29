@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('cities', "CitiesController@index"); // List Cities
 Route::post('cities', "CitiesController@store"); // Create City
-Route::get('daylites/?latitude', "DaylitesController@index"); // Get Daylight data
+Route::get('daylites', "DaylitesController@index"); // Get Daylight data
 
 // Route::get('posts', "PostController@index"); // List Posts
 // Route::post('posts', "PostController@store"); // Create Post

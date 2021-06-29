@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 class CitiesController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      *
