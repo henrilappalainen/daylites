@@ -151,12 +151,13 @@ export default {
         })
     },
     setPophours (day, index) {
-      const roundedDay = Math.round(day * 10) / 10
+      const hours = Math.floor(day)
+      const minutes = Math.round((day % 1) * 60)
 
       const offsetY = day >= 22 ? 40 : -30
 
       this.pophours = {
-        daylength: roundedDay,
+        daylength: hours + 'h,' + minutes + 'min',
         x: index * 1000/365 - 10,
         y: (24 - day) * 600 / 24 + offsetY
       }

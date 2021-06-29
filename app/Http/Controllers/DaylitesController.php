@@ -32,10 +32,6 @@ class DaylitesController extends Controller
 			$dayliteamount = 24;
 		}
 		
-		// var_dump($sunrise);
-		// var_dump($sunset);
-		// var_dump($dayliteamount);
-
 		return $dayliteamount;
 	}
 
@@ -46,7 +42,6 @@ class DaylitesController extends Controller
 
 		$list = [];
 
-		// for ($i = 0; $i <= 365; $i++) {
 		for ($i = 0; $i <= 365; $i++) {
 			array_push($list, $this->getDayLite($lat, $lng, $i));
 		}
