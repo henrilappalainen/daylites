@@ -21,11 +21,17 @@
           .add-city-form {
             margin: 20px 0;
           }
-          .add-city-form button {
-            background: steelblue;
+          button.btn {
+            background: #434792;
             border: none;
             padding: 0.2em 0.4em;
             color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.05s;
+          }
+          button.btn:hover {
+            background: #5059f4;
           }
           .content {
             position: relative;

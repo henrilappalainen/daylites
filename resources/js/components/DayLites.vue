@@ -7,9 +7,8 @@
       v-on:submit="getCityData">
       <label for="new-city-name">Lisää kaupunki</label>
       <input id="new-city-name" v-model="inp_name" />
-      <button>Lisää</button>
+      <button class="btn">Lisää</button>
     </form>
-
 
     <div v-if="cities" class="content">
       <div v-if="loading" class="loading">
@@ -57,14 +56,15 @@
         </svg>
       </div>
       <div class="daylite-description">
-        <div 
+        <div
           v-for="(city, index) in cities"
+          class="daylite-description__item" 
           :key="index">
           <span 
             class="daylite-description__color"
             :style="'background-color:' + city.color + ';'"></span>
           {{city.name}}
-          <button v-bind:data-name="city.name" v-on:click="removeItem">poista</button>
+          <button class="btn" v-bind:data-name="city.name" v-on:click="removeItem">Poista</button>
         </div>
       </div>
     </div>
@@ -82,7 +82,8 @@ export default {
       cities: [],
       inp_name: '',
       error: null,
-      pophours: null
+      pophours: null,
+      colorIndex: 0
     }
   },
   created () {
@@ -93,20 +94,26 @@ export default {
     fetchData ( cityname, latitude, longitude ) {
       this.error = null
       this.loading = true
-      // const fetchedId = this.$route.params.id
-      axios.get('/api/daylites?latitude=' + latitude + '&longitude=' + longitude)
+
+      axios.get('/api/daylites', {
+        params: {
+          latitude,
+          longitude
+      }})
         .then(response => {
-          const color = '#' + colorlist[this.cities.length]
+          const color = '#' + colorlist[this.colorIndex]
+
+          this.colorIndex++
+          this.colorIndex %= colorlist.length
 
           this.cities.push({name: cityname, values: response.data.daylites, color: color})
-
-          this.loading = false
         })
         .catch(error => {
           console.log('error:', error);
-          this.error = 'error occurred'
-          this.loading = false
+          this.error = 'Tapahtui virhe...'
         })
+
+        this.loading = false
     },
     getCityData (e) {
       e.preventDefault()
@@ -145,10 +152,13 @@ export default {
     },
     setPophours (day, index) {
       const roundedDay = Math.round(day * 10) / 10
+
+      const offsetY = day >= 22 ? 40 : -30
+
       this.pophours = {
         daylength: roundedDay,
         x: index * 1000/365 - 10,
-        y: (24 - day) * 600 / 24 - 30
+        y: (24 - day) * 600 / 24 + offsetY
       }
     },
     clearPophours () {
@@ -178,5 +188,15 @@ export default {
   }
   text.graph-desc-vertical {
     transform: rotate(90deg);
+  }
+  .daylite-description {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    max-width: 100%;
+    margin: auto;
+  }
+  .daylite-description__item {
+    margin: 10px 16px;
   }
 </style>

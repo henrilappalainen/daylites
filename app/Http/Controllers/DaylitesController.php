@@ -21,8 +21,7 @@ class DaylitesController extends Controller
 		// If sunrise is more than 12, it is on previous day. 
 		// Fix by making value negative for minus operation.
 		if ($sunrise[0] > 12) {
-			$sunrise[0] *= -1;
-			$sunrise[1] *= -1;
+			$sunrise[0] -= 24;
 		}
 
 		$dayliteamount = ($sunset[0] - $sunrise[0]) + ($sunset[1] - $sunrise[1]) / 60;
